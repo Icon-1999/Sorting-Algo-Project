@@ -12,6 +12,7 @@ array = [0] * 101
 array_color = [0]*101
 line_color =[(65,105,225), (250,128,114), 
 (250,128,114), (255, 102, 0)]
+num_switch = 0
 
 header_font = pygame.font.SysFont("strong", 30)
 common_font = pygame.font.SysFont("strong", 20)
@@ -30,7 +31,7 @@ def update_model():
     pygame.display.update()
     pygame.time.delay(20)
 
-#Sort array
+#insertion sort array
 def insertionSort(array, ascending=True):
     for i in range(1, len(array)):
         tmp = array[i]
@@ -42,17 +43,41 @@ def insertionSort(array, ascending=True):
         array_color[i]= line_color[1]
         update_model()
 
+def selectionSort(array, ascending=True):
+    for i in range(len(array)):
+        min_idx = i
+        array_color[i]= line_color[1]
+        update_model()
+        for j in range(i+1, len(array)):
+            if array[min_idx] > array[j]:
+                min_idx = j    
+        array[i], array[min_idx] = array[min_idx], array[i]
+
+def switch(num_switch):
+    if (num_switch == 0):
+        return 1
+
+    if (num_switch == 1):
+        return 0
+
 def draw():
     screen.fill((255, 255, 255))
 
-    header_txt = header_font.render("Algo Visualizer - Insertion Sort", 1, (0, 0, 0))
-    screen.blit(header_txt, (20, 20))
+    if (num_switch == 0):
+        header_txt = header_font.render("Algo Visualizer - Insertion Sort", 1, (0, 0, 0))
+        screen.blit(header_txt, (20, 10))
+    if (num_switch == 1):
+        header_txt = header_font.render("Algo Visualizer - Selection Sort", 1, (0, 0, 0))
+        screen.blit(header_txt, (20, 10))
 
     common_txt1 = common_font.render("Press 'space' to start sorting", 1, (0, 0, 0))
-    screen.blit(common_txt1, (20, 50))
+    screen.blit(common_txt1, (20, 40))
 
     common_txt2 = common_font.render("Press 'n' for new Array", 1, (0, 0, 0))
-    screen.blit(common_txt2, (20, 70))
+    screen.blit(common_txt2, (20, 60))
+
+    common_txt3 = common_font.render("Press 'c' to change Sort", 1, (0, 0, 0))
+    screen.blit(common_txt3, (20, 80))
 
     width = (800-150)//150
     boundry_arr = 850 / 100
@@ -76,8 +101,15 @@ while True:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_n:
                 NewArray()
+            if event.key == pygame.K_c:
+                NewArray()
+                num_switch = switch(num_switch)
+                print(num_switch)
             if event.key == pygame.K_SPACE:
-                insertionSort(array)
+                if (num_switch == 0):
+                    insertionSort(array)
+                if (num_switch == 1):
+                    selectionSort(array)
     draw()
     pygame.display.update()
 
