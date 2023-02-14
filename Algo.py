@@ -43,6 +43,7 @@ def insertionSort(array, ascending=True):
         array_color[i]= line_color[1]
         update_model()
 
+#selection sort array
 def selectionSort(array, ascending=True):
     for i in range(len(array)):
         min_idx = i
