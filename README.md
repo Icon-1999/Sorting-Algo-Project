@@ -1,11 +1,14 @@
 # Sorting-Algo-Project
 
-Project starts with an array of random numbers(lines) and
-uses Insertion sort to sort each line in order
+Project starts with an array of random numbers(lines)
+
+You can pick between Insertion sort and Selection sort to sort each line in order
 
 Press "space" to start the sort
 
-Press "n" to change to a new array unsorted array of lines
+Press "n" to change to a new unsorted array of lines
+
+Press "c" to change between sorts
 
 Will add more sorts in the future!
 
